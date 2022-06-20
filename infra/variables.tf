@@ -1,4 +1,10 @@
 variable "region" {
-  type    = string
-  default = "us-east-1"
+  type = string
 }
+
+variable "home_IP" {
+  type = string
+}
+
+# https://www.terraform.io/language/values/variables#variable-definitions-tfvars-files
+# https://www.terraform.io/language/values/variables#type-constraints
