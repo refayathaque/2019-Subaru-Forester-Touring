@@ -13,8 +13,9 @@ resource "aws_vpc" "main" {
 # so we reduce the remaining bits by 2 (to 26) to get 64 addresses in each subnet, (32 - 26 = 6, 2^6 = 64)
 # upon creation we see only 59 addresses in the console actually, I think AWS reserves 5 addresses for reasons I don't know
 resource "aws_subnet" "main_a" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.0/26"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.0/26"
+  availability_zone = "${var.region}a"
   # First IP 10.0.0.0 - Last IP 10.0.0.63
   tags = {
     Name        = "main-a"
@@ -23,8 +24,9 @@ resource "aws_subnet" "main_a" {
 }
 
 resource "aws_subnet" "main_b" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.64/26"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.64/26"
+  availability_zone = "${var.region}b"
   # First IP 10.0.0.64 - Last IP 10.0.0.127
   tags = {
     Name        = "main-b"
@@ -33,8 +35,9 @@ resource "aws_subnet" "main_b" {
 }
 
 resource "aws_subnet" "main_c" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.128/26"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.128/26"
+  availability_zone = "${var.region}c"
   # First IP 10.0.0.128 - Last IP 10.0.0.191
   tags = {
     Name        = "main-c"
@@ -43,8 +46,9 @@ resource "aws_subnet" "main_c" {
 }
 
 resource "aws_subnet" "main_d" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.0.192/26"
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.0.192/26"
+  availability_zone = "${var.region}d"
   # First IP 10.0.0.192 - Last IP 10.0.0.255
   tags = {
     Name        = "main-d"

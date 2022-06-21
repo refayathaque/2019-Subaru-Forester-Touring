@@ -27,6 +27,7 @@ resource "aws_security_group" "allow_http_and_https_from_home" {
     self        = true
     # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#ingress
   }
+  # https://stackoverflow.com/a/67615514
 
   egress {
     from_port        = 0
@@ -39,3 +40,5 @@ resource "aws_security_group" "allow_http_and_https_from_home" {
     Name = "allow_http_and_https_from_home"
   }
 }
+
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
