@@ -34,6 +34,30 @@ resource "aws_subnet" "main_b" {
   }
 }
 
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.main.id
+}
+
+resource "aws_route_table" "public_route_table" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.internet_gateway.id
+  }
+}
+
+resource "aws_route_table_association" "subnet_main_a" {
+  subnet_id      = aws_subnet.main_a.id
+  route_table_id = aws_route_table.public_route_table.id
+}
+
+resource "aws_route_table_association" "subnet_main_b" {
+  subnet_id      = aws_subnet.main_b.id
+  route_table_id = aws_route_table.public_route_table.id
+}
+
+# figured out (IG, RT and RTAs) ^ and some other ECSy things from here - https://github.com/datamindedbe/webinar-containers/tree/2b2f976f8098ade2c8e5c75b413af33ebcbf7b14/PART%20III/infrastructure
+
 resource "aws_subnet" "main_c" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.0.128/26"
