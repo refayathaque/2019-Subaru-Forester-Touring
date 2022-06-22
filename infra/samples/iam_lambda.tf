@@ -24,7 +24,7 @@
 #     Version = "2012-10-17"
 #     Statement = [
 #       {
-#         Sid : "ListObjectsInBucket"
+#         Sid = "ListObjectsInBucket"
 #         Action = [
 #           "s3:ListBucket",
 #         ]
@@ -67,7 +67,7 @@
 #     Version = "2012-10-17"
 #     Statement = [
 #       {
-#         Sid : "GetCodeFromCodeCommitRepo"
+#         Sid = "GetCodeFromCodeCommitRepo"
 #         Action = [
 #           "codecommit:*",
 #         ]
@@ -75,7 +75,7 @@
 #         Resource = aws_codecommit_repository.lambdas_source_code.arn
 #       },
 #       {
-#         Sid : "CopyLambdaDeploymentPackageToS3"
+#         Sid = "CopyLambdaDeploymentPackageToS3"
 #         Action = [
 #           "s3:PutObject",
 #         ]
@@ -83,7 +83,7 @@
 #         Resource = [aws_s3_bucket.utility_lambdas.arn, "${aws_s3_bucket.utility_lambdas.arn}/*"]
 #       },
 #       {
-#         Sid : "UpdateLambdaFunction"
+#         Sid = "UpdateLambdaFunction"
 #         Action = [
 #           "lambda:*",
 #         ]
@@ -91,7 +91,7 @@
 #         Resource = aws_lambda_function.list_objects.arn
 #       },
 #       {
-#         Sid : "WriteToCloudWatchLogs"
+#         Sid = "WriteToCloudWatchLogs"
 #         Action = [
 #           "logs:*",
 #         ]

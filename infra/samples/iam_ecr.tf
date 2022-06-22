@@ -4,7 +4,7 @@
 #     Version = "2012-10-17"
 #     Statement = [
 #       {
-#         Sid : "ECSTaskAccess"
+#         Sid = "ECSTaskAccess"
 #         Action = [
 #           "ecr:GetAuthorizationToken",
 #           "ecr:BatchCheckLayerAvailability",

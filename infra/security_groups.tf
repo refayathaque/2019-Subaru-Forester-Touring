@@ -5,11 +5,13 @@ resource "aws_security_group" "allow_http_and_https_from_home" {
 
   ingress {
     description = "HTTP"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 8080
+    to_port     = 8080
     protocol    = "tcp"
     cidr_blocks = [var.home_IP]
   }
+  # the ports here have to match the container port, so if you want to access a node.js container with the container exposed port set to 8080, this needs to be 8080
+  # conversely, if you want to access some other container, e.g., nginx:1.17.7 with the container exposed port set to 80, this needs to be 80
 
   ingress {
     description = "HTTPS"

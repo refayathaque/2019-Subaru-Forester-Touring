@@ -29,9 +29,9 @@ resource "aws_iam_role_policy_attachment" "hello_world_task_execution_ecs_task_e
 #     Version = "2012-10-17"
 #     Statement = [
 #       {
-#         Sid : "ListObjectsInBucket"
+#         Sid = "ListObjectsInBucket"
 #         Action = [
-#           "s3:ListBucket",
+#           "s3:ListBucket"
 #         ]
 #         Effect   = "Allow"
 #         Resource = "arn:aws-us-gov:s3:::${var.list_objects_bucket}"
