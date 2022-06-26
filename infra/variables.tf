@@ -2,7 +2,7 @@ variable "region" {
   type = string
 }
 
-variable "home_IP" {
+variable "prototype_a_IP" {
   type = string
 }
 

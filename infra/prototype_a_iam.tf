@@ -18,33 +18,10 @@ data "aws_iam_policy" "ecs_task_execution_role_policy" {
   name = "AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "hello_world_task_execution_ecs_task_execution_role_policy" {
+resource "aws_iam_role_policy_attachment" "hello_world_task_execution" {
   role       = aws_iam_role.hello_world_task_execution.name
   policy_arn = data.aws_iam_policy.ecs_task_execution_role_policy.arn
 }
-
-# resource "aws_iam_policy" "list_objects" {
-#   name = "ListObjectsInBucket${var.list_objects_bucket}"
-#   policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#       {
-#         Sid = "ListObjectsInBucket"
-#         Action = [
-#           "s3:ListBucket"
-#         ]
-#         Effect   = "Allow"
-#         Resource = "arn:aws-us-gov:s3:::${var.list_objects_bucket}"
-#       },
-#     ]
-#   })
-# }
-
-
-# resource "aws_iam_role_policy_attachment" "hello_world_task_list_objects" {
-#   role       = aws_iam_role.hello_world_task.name
-#   policy_arn = aws_iam_policy.list_objects.arn
-# }
 
 # how to work with roles, policies and policy attachments - https://www.lewuathe.com/how-to-add-new-policy-to-iam-role.html
 
