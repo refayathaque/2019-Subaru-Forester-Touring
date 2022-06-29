@@ -1,0 +1,2 @@
+* prototype-a 
+  * ECS task - simple node.js container running express and returning "hello world" as a response on port 8080 - has public IP, but only allowed to be accessed from a specific IP address
