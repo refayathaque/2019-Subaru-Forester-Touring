@@ -1,5 +1,5 @@
-# resource "aws_lb" "hello_world" {
-#   name     = "hello-world"
+# resource "aws_lb" "prototype_b" {
+#   name     = "prototype-b"
 #   internal = false
 #   # "For Scheme, choose Internet-facing or Internal. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses."
 #   load_balancer_type = "application"
@@ -8,32 +8,26 @@
 #   enable_deletion_protection = false
 # }
 
-# resource "aws_lb_target_group" "hello_world_home" {
-#   name        = "hello-world-home"
-#   port        = 8080
+# resource "aws_lb_target_group" "prototype_b_container_a" {
+#   name        = "container-a"
+#   port        = 80
 #   protocol    = "HTTP"
 #   vpc_id      = aws_vpc.main.id
 #   target_type = "ip"
 #   health_check {
-#     port     = 8080
+#     port     = "traffic-port"
 #     protocol = "HTTP"
 #     path     = "/"
 #   }
-#   tags = {
-#     "Name" = "hello-world-home"
-#   }
 # }
 
-# resource "aws_lb_listener" "hello_world_home" {
-#   load_balancer_arn = aws_lb.hello_world.arn
-#   port              = "8080"
+# resource "aws_lb_listener" "prototype_b_container_a" {
+#   load_balancer_arn = aws_lb.prototype_b.arn
+#   port              = "80"
 #   protocol          = "HTTP"
-#   # ssl_policy        = "ELBSecurityPolicy-2016-08"
-#   # certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-#   # ^ will need for when I configure HTTPS
 #   default_action {
 #     type             = "forward"
-#     target_group_arn = aws_lb_target_group.hello_world_home.arn
+#     target_group_arn = aws_lb_target_group.prototype_b_container_a.arn
 #   }
 # }
 
