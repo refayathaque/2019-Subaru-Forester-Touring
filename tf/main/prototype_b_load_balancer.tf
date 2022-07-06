@@ -3,7 +3,7 @@
 #   internal = false
 #   # "For Scheme, choose Internet-facing or Internal. An internet-facing load balancer routes requests from clients to targets over the internet. An internal load balancer routes requests to targets using private IP addresses."
 #   load_balancer_type = "application"
-#   subnets            = [aws_subnet.main_a.id, aws_subnet.main_b.id]
+#   subnets            = [aws_subnet.public_a.id, aws_subnet.public_b.id]
 #   # required
 #   enable_deletion_protection = false
 # }
