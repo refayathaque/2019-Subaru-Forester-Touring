@@ -9,7 +9,7 @@ const app = express();
 
 app.get("/", async (req, res) => {
   const tables = await listTables();
-  res.send(tables);
+  res.send({ DynamoDBtables: tables });
 });
 
 app.listen(PORT, () => console.log(`This app is listening on port ${PORT}`));
