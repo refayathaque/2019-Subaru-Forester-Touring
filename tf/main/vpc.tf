@@ -22,6 +22,7 @@ resource "aws_subnet" "public_a" {
     Environment = "dev"
   }
 }
+# ^ being used with prototype-a
 
 resource "aws_subnet" "public_b" {
   vpc_id            = aws_vpc.main.id
@@ -33,33 +34,67 @@ resource "aws_subnet" "public_b" {
     Environment = "dev"
   }
 }
-# ^ two subnets (a and b) being used with prototype-a
+# ^ being used with prototype-b
 
-resource "aws_subnet" "main_c" {
+resource "aws_subnet" "private_c" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.0.128/26"
   availability_zone = "${var.region}c"
   # First IP 10.0.0.128 - Last IP 10.0.0.191
   tags = {
-    Name        = "main-c"
+    Name        = "private-c"
+    Environment = "dev"
+  }
+}
+# ^ being used with prototype-b
+
+# For private subnets, we need to attach a NAT gateway to connect to the outside world
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat_gateway.id
+  subnet_id     = aws_subnet.private_c.id
+  depends_on    = [aws_internet_gateway.main]
+  tags = {
+    Name        = "for subnet ${aws_subnet.private_c.id}"
     Environment = "dev"
   }
 }
 
-resource "aws_subnet" "main_d" {
+resource "aws_eip" "nat_gateway" {
+  vpc = true
+  tags = {
+    Name        = "for NAT gateway ${aws_nat_gateway.main.id}"
+    Environment = "dev"
+  }
+}
+
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.subnet_private_c.id
+  }
+}
+
+resource "aws_route_table_association" "subnet_private_c" {
+  subnet_id      = aws_subnet.private_c.id
+  route_table_id = aws_route_table.private_route_table.id
+}
+
+resource "aws_subnet" "private_d" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.0.192/26"
   availability_zone = "${var.region}d"
   # First IP 10.0.0.192 - Last IP 10.0.0.255
   tags = {
-    Name        = "main-d"
+    Name        = "private-d"
     Environment = "dev"
   }
 }
+
 # how I figured out subnets CIDRs based on vpc CIDR - https://medium.com/geekculture/aws-vpc-and-subnet-cidr-calculation-and-allocation-cfbe69050712
 # https://www.ipaddressguide.com/cidr
 
-resource "aws_internet_gateway" "internet_gateway" {
+resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 }
 
@@ -67,7 +102,7 @@ resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.main.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.internet_gateway.id
+    gateway_id = aws_internet_gateway.main.id
   }
 }
 
