@@ -14,14 +14,11 @@ resource "aws_ecr_repository" "reads_from_dydb" {
   }
 }
 
-output "aws_ecr_repository_hello_world_arn" {
-  value = aws_ecr_repository.hello_world.arn
-}
-
-output "aws_ecr_repository_hello_world_registry_id" {
-  value = aws_ecr_repository.hello_world.registry_id
-}
-
 output "aws_ecr_repository_hello_world_repository_url" {
   value = aws_ecr_repository.hello_world.repository_url
+}
+# ^ need this when pushing images from local to ECR using Docker push command
+
+output "aws_ecr_repository_reads_from_dydb_repository_url" {
+  value = aws_ecr_repository.reads_from_dydb.repository_url
 }

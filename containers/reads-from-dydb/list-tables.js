@@ -14,7 +14,9 @@ const configDev = {
 };
 
 const client = new DynamoDBClient(
-  process.env.DEV_LOCAL ? configDevLocal : configDev
+  process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY
+    ? configDevLocal
+    : configDev
 );
 
 const params = {};
