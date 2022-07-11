@@ -3,6 +3,7 @@ resource "aws_vpc" "main" {
   # First IP 10.0.0.0 - Last IP 10.0.0.255
   # an IPv4 consists of 32 bits, and the remaining bits you attach to the end of a CIDR (e.g., .../24) tells you how many addresses you get, so in this case you get 256 addresses (32 - 24 = 8, 2^8 = 256)
   instance_tenancy = "default"
+  enable_dns_hostnames = true
   tags = {
     Name        = "main"
     Environment = "dev"
@@ -51,7 +52,7 @@ resource "aws_subnet" "private_c" {
 # For private subnets, we need to attach a NAT gateway to connect to the outside world
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat_gateway.id
-  subnet_id     = aws_subnet.private_c.id
+  subnet_id     = aws_subnet.public_b.id
   depends_on    = [aws_internet_gateway.main]
   tags = {
     Name        = "for subnet ${aws_subnet.private_c.id}"

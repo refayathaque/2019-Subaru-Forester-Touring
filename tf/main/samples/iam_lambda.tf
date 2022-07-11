@@ -36,12 +36,12 @@
 # }
 
 # resource "aws_iam_role_policy_attachment" "list_objects_lambda_function_basic_execution_policy" {
-#   role       = aws_iam_role.list_objects_lambda_function.name
+#   role       = aws_iam_role.list_objects_lambda_function.id
 #   policy_arn = data.aws_iam_policy.lambda_basic_execution_policy.arn
 # }
 
 # resource "aws_iam_role_policy_attachment" "list_objects_lambda_function_list_objects" {
-#   role       = aws_iam_role.list_objects_lambda_function.name
+#   role       = aws_iam_role.list_objects_lambda_function.id
 #   policy_arn = aws_iam_policy.list_objects.arn
 # }
 
@@ -103,7 +103,7 @@
 # }
 
 # resource "aws_iam_role_policy_attachment" "list_objects_lambda_function_codebuild" {
-#   role       = aws_iam_role.list_objects_lambda_function_codebuild.name
+#   role       = aws_iam_role.list_objects_lambda_function_codebuild.id
 #   policy_arn = aws_iam_policy.list_objects_lambda_function_codebuild.arn
 # }
 
