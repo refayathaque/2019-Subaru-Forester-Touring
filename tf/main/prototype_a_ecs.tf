@@ -45,7 +45,7 @@
 #       # https://github.com/cloudquery/cq-provider-aws/blob/35f5c13908ffdb3f91dd6da2d716004db9a3f2dd/terraform/ecs/modules/test/task_definitions.tf
 #     }
 #   ])
-#   execution_role_arn = aws_iam_role.hello_world_task_execution.arn
+#   execution_role_arn = aws_iam_role.task_execution.arn
 #   network_mode       = "awsvpc"
 #   cpu                = 256
 #   memory             = 512

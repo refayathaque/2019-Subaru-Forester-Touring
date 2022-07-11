@@ -1,5 +1,5 @@
-resource "aws_iam_role" "hello_world_task_execution" {
-  name = "HelloWorldTaskExecution"
+resource "aws_iam_role" "task_execution" {
+  name = "TaskExecution"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -18,8 +18,8 @@ data "aws_iam_policy" "ecs_task_execution_role_policy" {
   name = "AmazonECSTaskExecutionRolePolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "hello_world_task_execution" {
-  role       = aws_iam_role.hello_world_task_execution.name
+resource "aws_iam_role_policy_attachment" "task_execution" {
+  role       = aws_iam_role.task_execution.name
   policy_arn = data.aws_iam_policy.ecs_task_execution_role_policy.arn
 }
 
