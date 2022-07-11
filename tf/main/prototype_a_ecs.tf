@@ -50,7 +50,7 @@
 #   cpu                = 256
 #   memory             = 512
 #   # When you register a task definition, you can specify the total CPU and memory used for the task. This is separate from the cpu and memory values at the container definition level. For tasks that are hosted on Amazon EC2 instances, these fields are optional. For tasks that are hosted on Fargate (both Linux and Windows), these fields are required and there are specific values for both cpu and memory that are supported.
-#   # you'll get a Terraform error like, "Error: failed creating ECS Task Definition (hello-world): ClientException: No Fargate configuration exists for given values: 128 CPU, 256 memory. See the Amazon ECS documentation for the valid values." if you set the task cpu at 128 and memory at 256, I think you basically can't set the task's compute levels to the that of the container's, it needs to be at least 2x the container's cpu and memory
+#   # you'll get a Terraform error like, "Error: failed creating ECS Task Definition (hello-world): ClientException: No Fargate configuration exists for given values: 128 CPU, 256 memory. See the Amazon ECS documentation for the valid values.", this happens if you set the container's cpu and memory levels to the same as the task's, i.e., you can't set the task's compute levels to the that of the container's, the task's needs to be at least 2x the container's cpu and memory
 # }
 
 # task definition parameters - https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html

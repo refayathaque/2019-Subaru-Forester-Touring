@@ -17,6 +17,6 @@
 
 
 # resource "aws_iam_role_policy_attachment" "hello_world_task_list_objects" {
-#   role       = aws_iam_role.hello_world_task.name
+#   role       = aws_iam_role.hello_world_task.id
 #   policy_arn = aws_iam_policy.list_objects.arn
 # }
